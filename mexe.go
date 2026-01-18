@@ -8,20 +8,20 @@ import (
 	"github.com/marzeq/mexe/tokeniser"
 )
 
-func Evaluate(expression string, degreesMode bool) (float64, error) {
+func Evaluate(expression string, degreesMode bool) (evaluator.Number, error) {
 	tokens, err := tokeniser.Tokenise(expression)
 	if err != nil {
-		return 0, fmt.Errorf("Tokeniser error: %v", err)
+		return evaluator.Number{}, fmt.Errorf("Tokeniser error: %v", err)
 	}
 
 	ast, err := parser.Parse(tokens)
 	if err != nil {
-		return 0, fmt.Errorf("Parser error: %v", err)
+		return evaluator.Number{}, fmt.Errorf("Parser error: %v", err)
 	}
 
 	eval, err := evaluator.Evaluate(ast, degreesMode)
 	if err != nil {
-		return 0, fmt.Errorf("Evaluator error: %v", err)
+		return evaluator.Number{}, fmt.Errorf("Evaluator error: %v", err)
 	}
 
 	return eval, nil
