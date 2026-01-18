@@ -75,5 +75,20 @@ func (n Number) Format(prec int) string {
 	if n.i != nil {
 		return n.i.String()
 	}
-	return n.f.Text('f', prec)
+
+	f := n.f
+
+	if i, acc := f.Int(nil); acc == big.Exact {
+		return i.String()
+	}
+
+	s := f.Text('f', prec)
+	s = strings.TrimRight(s, "0")
+	s = strings.TrimRight(s, ".")
+
+	if s == "-0" {
+		return "0"
+	}
+
+	return s
 }
