@@ -40,5 +40,5 @@ func main() {
 		os.Exit(1)
 	}
 
-	fmt.Println(formatNumber(val, *prec))
+	fmt.Println(val.Format(*prec))
 }

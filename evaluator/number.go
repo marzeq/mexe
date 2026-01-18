@@ -71,9 +71,9 @@ func promote(a, b Number) (Number, Number) {
 	return NewFloat(a.Float()), NewFloat(b.Float())
 }
 
-func (n Number) String() string {
+func (n Number) Format(prec int) string {
 	if n.i != nil {
 		return n.i.String()
 	}
-	return n.f.Text('f', -1)
+	return n.f.Text('f', prec)
 }
