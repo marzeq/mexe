@@ -56,7 +56,7 @@ func (t *Tokeniser) SkipWhile(predicate func(rune) bool) {
 }
 
 func isWhitespace(ch rune) bool {
-	return ch == ' ' || ch == '\t' || ch == '\n' || ch == '\r'
+	return ch == ' ' || ch == '\t'
 }
 
 func isDigit(ch rune) bool {
@@ -175,6 +175,15 @@ func (t *Tokeniser) Tokenise() error {
 		} else if ch == '|' {
 			t.Tokens = append(t.Tokens, Token{Type: TOKEN_PIPE, Pos: startPos})
 			t.Skip()
+		} else if ch == '=' {
+			t.Tokens = append(t.Tokens, Token{Type: TOKEN_EQUALS, Pos: startPos})
+			t.Skip()
+		} else if ch == ';' || ch == '\n' || ch == '\r' {
+			t.Tokens = append(t.Tokens, Token{Type: TOKEN_SEPARATOR, Pos: startPos})
+			t.Skip()
+			if ch == '\r' && t.Peek() == '\n' {
+				t.Skip()
+			}
 		} else {
 			return fmt.Errorf("Unknown character: %s", string(ch))
 		}

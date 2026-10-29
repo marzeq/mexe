@@ -14,12 +14,12 @@ func Evaluate(expression string, degreesMode bool) (evaluator.Number, error) {
 		return evaluator.Number{}, fmt.Errorf("Tokeniser error: %v", err)
 	}
 
-	ast, err := parser.Parse(tokens)
+	program, err := parser.ParseProgram(tokens)
 	if err != nil {
 		return evaluator.Number{}, fmt.Errorf("Parser error: %v", err)
 	}
 
-	eval, err := evaluator.Evaluate(ast, degreesMode)
+	eval, err := evaluator.EvaluateProgram(program, degreesMode)
 	if err != nil {
 		return evaluator.Number{}, fmt.Errorf("Evaluator error: %v", err)
 	}
@@ -33,7 +33,7 @@ func CheckSyntax(expression string) error {
 		return fmt.Errorf("Tokeniser error: %v", err)
 	}
 
-	_, err = parser.Parse(tokens)
+	_, err = parser.ParseProgram(tokens)
 	if err != nil {
 		return fmt.Errorf("Parser error: %v", err)
 	}

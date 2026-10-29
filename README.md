@@ -87,6 +87,19 @@ All of the following are valid:
 sin(2pi)
 ```
 
+### Definitions
+
+Define constants and functions before the final expression. Separate statements with semicolons or newlines. Blank lines are ignored, including trailing blank lines.
+
+```bash
+mexe 'phi=1.6180339887; phi^2'
+mexe 'f(x)=2x+3; f(4)'
+mexe 'sum(x,y,z)=x+y+z
+sum(1,2,3)'
+```
+
+The last nonblank statement is always the expression to evaluate. Definitions can use earlier constants and functions. Function parameters are local to that call and the number of arguments must match the definition. A definition can replace a built-in constant or function for that evaluation.
+
 ## Constants
 
 | Name | Description    |

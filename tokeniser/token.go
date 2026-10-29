@@ -23,6 +23,8 @@ const (
 	TOKEN_PIPE // |
 
 	TOKEN_IDENTIFIER
+	TOKEN_EQUALS    // =
+	TOKEN_SEPARATOR // ; or newline
 )
 
 type Token struct {
@@ -63,6 +65,10 @@ func (t Token) String() string {
 		return "|"
 	case TOKEN_IDENTIFIER:
 		return t.Value
+	case TOKEN_EQUALS:
+		return "="
+	case TOKEN_SEPARATOR:
+		return ";"
 	default:
 		panic("Unknown token type")
 	}
